@@ -502,6 +502,11 @@ footer .footer-links a:hover { color: var(--violet-light); }
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <div style="display:flex;gap:4px;align-items:center;margin-right:8px;">
+    <button onclick="setLang('en')" id="btn-en" style="background:none;border:2px solid #7c3aed;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:16px;line-height:1;transition:all .2s;" title="English">🇺🇸</button>
+    <button onclick="setLang('pt')" id="btn-pt" style="background:none;border:2px solid rgba(255,255,255,0.12);border-radius:6px;padding:3px 6px;cursor:pointer;font-size:16px;line-height:1;transition:all .2s;" title="Português">🇧🇷</button>
+    <button onclick="setLang('es')" id="btn-es" style="background:none;border:2px solid rgba(255,255,255,0.12);border-radius:6px;padding:3px 6px;cursor:pointer;font-size:16px;line-height:1;transition:all .2s;" title="Español">🇪🇸</button>
+  </div>
   <a href="#contact" class="nav-cta desktop">Let's Talk</a>
   <button class="hamburger" id="hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1123,11 +1128,7 @@ window.addEventListener('scroll', () => {
 </script>
 
 <!-- ========== LANGUAGE SWITCHER ========== -->
-<div id="lang-switcher" style="position:fixed;top:20px;right:80px;z-index:999;display:flex;gap:6px;">
-  <button onclick="setLang('en')" id="btn-en" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="English">🇺🇸</button>
-  <button onclick="setLang('pt')" id="btn-pt" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="Português">🇧🇷</button>
-  <button onclick="setLang('es')" id="btn-es" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="Español">🇪🇸</button>
-</div>
+<!-- lang buttons moved to nav -->
 
 <script>
 (function(){
