@@ -1128,14 +1128,112 @@ window.addEventListener('scroll', () => {
 </script>
 
 <!-- ========== LANGUAGE SWITCHER ========== -->
-<!-- lang buttons moved to nav -->
-
 <script>
 (function(){
-  // Translation dictionary - maps CSS selector → {en, pt, es}
-  var T = {
+  // ============ FULL i18n ENGINE ============
+  // Store original EN content on first load
+  var originals = {};
+  var TRANSLATABLE = [
     // Nav
-    'a[href="#about"]': { en:'About', pt:'Sobre', es:'Sobre mí' },
+    { sel: 'a[href="#about"]', pt: 'Sobre', es: 'Sobre mí' },
+    { sel: 'a[href="#career"]', pt: 'Carreira', es: 'Carrera' },
+    { sel: 'a[href="#projects"]', pt: 'Projetos', es: 'Proyectos' },
+    { sel: 'a[href="#stack"]', pt: 'Stack', es: 'Stack' },
+    { sel: 'a[href="#education"]', pt: 'Formação', es: 'Formación' },
+    { sel: 'a[href="#contact"]', pt: 'Contato', es: 'Contacto' },
+    { sel: '.nav-cta.desktop', pt: 'Fale Comigo', es: 'Hablemos' },
+
+    // Hero
+    { sel: '.hero-subtitle', pt: 'AI Engineer · Cientista de Dados · Fundador — Da auditoria à IA, construindo sistemas que recuperaram US$600K, formaram 6.000+ profissionais e geraram $1M+ em receita.', es: 'AI Engineer · Científico de Datos · Fundador — De auditoría a IA, construyendo sistemas que recuperaron US$600K, formaron 6.000+ profesionales y generaron $1M+ en ingresos.' },
+
+    // Impact
+    { sel: '#impact .section-label', pt: 'Impacto', es: 'Impacto' },
+
+    // About
+    { sel: '#about .section-label', pt: 'Sobre', es: 'Sobre mí' },
+    { sel: '#about .section-title', pt: 'Engenheiro de resultados,<br>não apenas dashboards.', es: 'Ingeniería de resultados,<br>no solo dashboards.' },
+
+    // Career
+    { sel: '#career .section-label', pt: 'Carreira', es: 'Carrera' },
+    { sel: '#career .section-title', pt: 'Uma década de impacto crescente.', es: 'Una década de impacto creciente.' },
+
+    // Projects
+    { sel: '#projects .section-label', pt: 'Projetos', es: 'Proyectos' },
+    { sel: '#projects .section-title', pt: 'Produtos ao vivo, usuários reais.', es: 'Productos en vivo, usuarios reales.' },
+
+    // Tech
+    { sel: '#skills .section-label', pt: 'Tecnologias', es: 'Tecnologías' },
+    { sel: '#skills .section-title', pt: 'Ferramentas que entregam.', es: 'Herramientas que entregan.' },
+
+    // Education
+    { sel: '#education .section-label', pt: 'Formação e Certificações', es: 'Formación y Certificaciones' },
+    { sel: '#education .section-title', pt: 'Aprendizado contínuo.', es: 'Aprendizaje continuo.' },
+
+    // Contact
+    { sel: '#contact .section-label', pt: 'Contato', es: 'Contacto' },
+    { sel: '#contact .section-title', pt: 'Vamos construir algo<br>extraordinário?', es: '¿Construyamos algo<br>extraordinario?' },
+    { sel: '#contact > .container > p', pt: 'Precisa de um engenheiro de IA, um estrategista de dados ou um cofundador técnico? Adoraria ouvir sobre seu desafio.', es: '¿Necesita un ingeniero de IA, un estratega de datos o un cofundador técnico? Me encantaría escuchar sobre su desafío.' },
+
+    // Footer
+    { sel: 'footer p', pt: 'Projetado e construído por Venito Gules — Porto Alegre, Brasil', es: 'Diseñado y construido por Venito Gules — Porto Alegre, Brasil' },
+  ];
+
+  // Timeline entries (by index)
+  var TIMELINE = [
+    { h: { pt: 'Auditoria & Contabilidade', es: 'Auditoría & Contabilidad' },
+      p: { pt: 'Iniciei na auditoria financeira em uma das Big 8 globais, depois fui para a Yara — a maior empresa de fertilizantes do mundo. Automatizei processos de conciliação e recuperei US$600.000 para o primeiro cliente.', es: 'Comencé en auditoría financiera en una de las Big 8 globales, luego pasé a Yara — la mayor empresa de fertilizantes del mundo. Automaticé procesos de conciliación y recuperé US$600.000 para el primer cliente.' } },
+    { h: { pt: 'Analista de Dados', es: 'Analista de Datos' },
+      p: { pt: 'Construí dashboards de BI para o maior grupo de EdTech da América Latina. Implementei analytics de gamificação, suporte à LGPD e entreguei insights acionáveis em todo o ecossistema Plataforma A.', es: 'Construí dashboards de BI para el mayor grupo EdTech de Latinoamérica. Implementé analytics de gamificación, soporte a LGPD y entregué insights accionables en todo el ecosistema.' } },
+    { h: { pt: 'Analista de Dados Sênior', es: 'Analista de Datos Senior' },
+      p: { pt: 'Alocado no Sicredi — o primeiro banco cooperativo do Brasil com 100+ anos e 6M de clientes. Liderei a migração completa de Tableau para Power BI. Criei dashboards acessados por milhares diariamente. Depois fui para o banco T10 (Grupo Martins, R$7B de receita).', es: 'Asignado al Sicredi — primer banco cooperativo de Brasil con 100+ años y 6M de clientes. Lideré la migración completa de Tableau a Power BI. Creé dashboards accedidos por miles diariamente.' } },
+    { h: { pt: 'Coordenador de Dados & Analytics', es: 'Coordinador de Datos & Analytics' },
+      p: { pt: 'Construí e gerenciei 5 squads especializados: Produto, Growth, Engajamento, Retenção e Esportes. Liderei a implementação da LGPD. Orquestrei a maior Black Friday da história da empresa.', es: 'Construí y gestioné 5 squads especializados: Producto, Growth, Engagement, Retención y Deportes. Lideré la implementación de LGPD. Orquesté el mayor Black Friday en la historia de la empresa.' } },
+    { h: { pt: 'Fundador & CEO', es: 'Fundador & CEO' },
+      p: { pt: 'Fundei uma EdTech do zero e escalei para $1M+ em receita. Formei 6.000+ profissionais em dados. 900+ colocados em empresas como Nubank, Shopee, LinkedIn, Uber e iFood. Consultoria para Piracanjuba e Grupo Herval (25 marcas, 7.000 funcionários).', es: 'Fundé una EdTech desde cero y la escalé a $1M+ en ingresos. Formé 6.000+ profesionales en datos. 900+ colocados en empresas como Nubank, Shopee, LinkedIn, Uber e iFood.' } },
+    { h: { pt: 'Engenheiro de IA', es: 'Ingeniero de IA' },
+      p: { pt: 'Construindo ecossistemas de IA completos: agentes WhatsApp, previsão de demanda com ML, precificação inteligente, análise de cesta de mercado e BI gerencial com 34 indicadores. Cofundei a FLEEKERS — uma plataforma SaaS de marketing.', es: 'Construyendo ecosistemas de IA completos: agentes WhatsApp, forecasting con ML, pricing inteligente, análisis de canasta y BI gerencial con 34 indicadores. Cofundé FLEEKERS.' } },
+  ];
+
+  // About paragraphs
+  var ABOUT = [
+    { pt: "Sou AI Engineer e Cientista de Dados em Porto Alegre, com uma trajetória que passa por <strong>auditoria, big data, inteligência em mídia, educação e inteligência artificial</strong>. Minha carreira é definida por um padrão: entro em organizações complexas, encontro os pontos de alavancagem e construo sistemas que produzem resultados mensuráveis.",
+      es: "Soy AI Engineer y Científico de Datos en Porto Alegre, con una trayectoria que abarca <strong>auditoría, big data, inteligencia en medios, educación e inteligencia artificial</strong>. Mi carrera se define por un patrón: entro en organizaciones complejas, encuentro los puntos de apalancamiento y construyo sistemas que producen resultados medibles." },
+    { pt: 'Na <strong>Yara</strong>, a maior empresa de fertilizantes do mundo, automatizei processos de conciliação e recuperei <strong>US$600.000</strong> para o primeiro cliente. No <strong>Grupo RBS</strong>, o maior grupo de mídia do Sul do Brasil, coordenei 5 squads de dados e conduzi a <strong>maior Black Friday da história da empresa</strong>. Depois fundei a <strong>Data Mundo</strong>, formando mais de 6.000 profissionais e colocando 900+ deles em empresas como Nubank, Shopee e Uber.',
+      es: 'En <strong>Yara</strong>, la mayor empresa de fertilizantes del mundo, automaticé procesos de conciliación y recuperé <strong>US$600.000</strong>. En <strong>Grupo RBS</strong>, el mayor grupo de medios del sur de Brasil, coordiné 5 squads de datos e impulsé el <strong>mayor Black Friday en la historia de la empresa</strong>. Luego fundé <strong>Data Mundo</strong>, formando 6.000+ profesionales y colocando 900+ en Nubank, Shopee, Uber.' },
+    { pt: "Hoje, construo <strong>ecossistemas de IA de ponta a ponta</strong> — de agentes WhatsApp e engines de pricing com ML a modelos preditivos de demanda e plataformas de BI gerencial. Falo quatro idiomas, escrevo código em produção e lidero equipes. Eu não apenas analiso dados. Eu construo produtos que movem negócios.",
+      es: "Hoy, construyo <strong>ecosistemas de IA de extremo a extremo</strong> — desde agentes WhatsApp y motores de pricing con ML hasta modelos predictivos de demanda y plataformas de BI gerencial. Hablo cuatro idiomas, escribo código en producción y lidero equipos. No solo analizo datos. Construyo productos que mueven negocios." },
+  ];
+
+  // Impact labels
+  var IMPACT_LABELS = [
+    { pt: 'Recuperados na Yara', es: 'Recuperados en Yara' },
+    { pt: 'Profissionais Formados', es: 'Profesionales Formados' },
+    { pt: 'Colocados no Mercado', es: 'Colocados en el Mercado' },
+    { pt: 'Receita Gerada', es: 'Ingresos Generados' },
+  ];
+
+  // Project descriptions
+  var PROJECTS = [
+    { pt: 'Plataforma de aprendizado com IA, gamificação, 9 trilhas, revisão de CV e LinkedIn com IA, e funil de quiz comportamental.', es: 'Plataforma de aprendizaje con IA, gamificación, 9 rutas, revisión de CV y LinkedIn con IA, y funnel de quiz comportamental.' },
+    { pt: 'Ecossistema completo de IA para farmácias: agentes WhatsApp, pricing com ML, previsão de demanda, análise de cesta e 34 indicadores de BI.', es: 'Ecosistema completo de IA para farmacias: agentes WhatsApp, pricing con ML, pronóstico de demanda, análisis de canasta y 34 indicadores de BI.' },
+    { pt: 'Plataforma de publicidade veicular OOH com rastreamento GPS, pagamentos Asaas, gamificação de motoristas e dashboards de campanha em tempo real.', es: 'Plataforma de publicidad vehicular OOH con rastreo GPS, pagos Asaas, gamificación de conductores y dashboards de campaña en tiempo real.' },
+    { pt: 'SaaS de marketing com arquitetura multi-tenant, criador de posts com IA e analytics de crescimento para agências e criadores.', es: 'SaaS de marketing con arquitectura multi-tenant, creador de posts con IA y analytics de crecimiento para agencias y creadores.' },
+    { pt: 'BI + IA para restaurantes. Dashboards inteligentes, otimização de custos e analytics preditivo para operações de food service.', es: 'BI + IA para restaurantes. Dashboards inteligentes, optimización de costos y analytics predictivo para operaciones de food service.' },
+    { pt: 'Três apps full-stack adicionais: sistema de agendamento para barbearia, gestão de academia de BJJ e plataforma de gestão para igrejas. Todos em produção.', es: 'Tres apps full-stack adicionales: sistema de reservas para barbería, gestión de academia de BJJ y plataforma de gestión para iglesias. Todos en producción.' },
+  ];
+
+  // Projects subtitle
+  var PROJ_SUB = { pt: 'Cada projeto abaixo está ao vivo em produção. Usuários reais, receita real, impacto real. Clique para explorar.', es: 'Cada proyecto está en vivo en producción. Usuarios reales, ingresos reales, impacto real. Haz clic para explorar.' };
+
+  // Education
+  var EDU = {
+    degrees: { pt: 'Graduações', es: 'Títulos' },
+    certs: { pt: 'Certificações', es: 'Certificaciones' },
+    deg1: { pt: 'Bacharelado em Matemática', es: 'Licenciatura en Matemáticas' },
+    deg2: { pt: 'Bacharelado em Ciências Contábeis', es: 'Licenciatura en Contabilidad' },
+    school2: { pt: 'UFRGS — Universidade Federal do Rio Grande do Sul', es: 'UFRGS — Universidad Federal de Rio Grande do Sul' },
+  };
+  var T_OLD = { // keeping for reference only
     'a[href="#career"]': { en:'Career', pt:'Carreira', es:'Carrera' },
     'a[href="#projects"]': { en:'Projects', pt:'Projetos', es:'Proyectos' },
     'a[href="#education"]': { en:'Education', pt:'Formação', es:'Formación' },
@@ -1235,66 +1333,133 @@ window.addEventListener('scroll', () => {
 
   var currentLang = 'en';
 
+  // Save original EN content on first run
+  var saved = false;
+  var origAbout = [], origTimeline = [], origProjects = [], origImpact = [];
+
+  function saveOriginals() {
+    if (saved) return;
+    document.querySelectorAll('#about .about-text p').forEach(function(p) { origAbout.push(p.innerHTML); });
+    document.querySelectorAll('.timeline-item').forEach(function(item) {
+      origTimeline.push({ h: item.querySelector('h3').innerHTML, p: item.querySelector('p').innerHTML });
+    });
+    document.querySelectorAll('.project-card .project-info p').forEach(function(p) { origProjects.push(p.innerHTML); });
+    document.querySelectorAll('.stat-label').forEach(function(el) { origImpact.push(el.textContent); });
+    saved = true;
+  }
+
   window.setLang = function(lang) {
-    currentLang = lang;
+    saveOriginals();
 
-    // Update button borders
-    document.getElementById('btn-en').style.borderColor = lang === 'en' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
-    document.getElementById('btn-pt').style.borderColor = lang === 'pt' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
-    document.getElementById('btn-es').style.borderColor = lang === 'es' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
+    // Buttons
+    document.getElementById('btn-en').style.borderColor = lang === 'en' ? '#7c3aed' : 'rgba(255,255,255,0.12)';
+    document.getElementById('btn-pt').style.borderColor = lang === 'pt' ? '#7c3aed' : 'rgba(255,255,255,0.12)';
+    document.getElementById('btn-es').style.borderColor = lang === 'es' ? '#7c3aed' : 'rgba(255,255,255,0.12)';
 
-    // Apply selector-based translations
-    Object.keys(T).forEach(function(sel) {
-      var els = document.querySelectorAll(sel);
+    // 1. Simple selector-based (nav, section labels, section titles)
+    TRANSLATABLE.forEach(function(t) {
+      var els = document.querySelectorAll(t.sel);
       els.forEach(function(el) {
-        var text = T[sel][lang];
-        if (text) el.innerHTML = text;
+        if (!el._origEN) el._origEN = el.innerHTML;
+        el.innerHTML = lang === 'en' ? el._origEN : (t[lang] || el._origEN);
       });
     });
 
-    // About paragraphs
-    var aboutPs = document.querySelectorAll('#about .about-text p');
-    aboutPs.forEach(function(p, i) {
-      if (aboutParas[i] && aboutParas[i][lang]) {
-        p.innerHTML = aboutParas[i][lang];
+    // 2. About paragraphs
+    document.querySelectorAll('#about .about-text p').forEach(function(p, i) {
+      if (lang === 'en') { p.innerHTML = origAbout[i] || p.innerHTML; }
+      else if (ABOUT[i] && ABOUT[i][lang]) { p.innerHTML = ABOUT[i][lang]; }
+    });
+
+    // 3. Timeline
+    document.querySelectorAll('.timeline-item').forEach(function(item, i) {
+      var h = item.querySelector('h3');
+      var p = item.querySelector('p');
+      if (lang === 'en') {
+        if (origTimeline[i]) { h.innerHTML = origTimeline[i].h; p.innerHTML = origTimeline[i].p; }
+      } else if (TIMELINE[i]) {
+        if (TIMELINE[i].h[lang]) h.textContent = TIMELINE[i].h[lang];
+        if (TIMELINE[i].p[lang]) p.textContent = TIMELINE[i].p[lang];
       }
     });
 
-    // Impact labels
-    var impactEls = document.querySelectorAll('.stat-label');
-    impactEls.forEach(function(el, i) {
-      if (impactLabels[i] && impactLabels[i][lang]) {
-        el.textContent = impactLabels[i][lang];
-      }
+    // 4. Projects descriptions
+    document.querySelectorAll('.project-card .project-info p').forEach(function(p, i) {
+      if (lang === 'en') { p.innerHTML = origProjects[i] || p.innerHTML; }
+      else if (PROJECTS[i] && PROJECTS[i][lang]) { p.textContent = PROJECTS[i][lang]; }
     });
 
-    // Typing effect titles
-    if (window.typingTitles) {
-      if (lang === 'pt') {
-        window.typingTitles = ['AI Engineer', 'Cientista de Dados', 'Fundador & Educador', 'Full-Stack Builder', 'Da Auditoria à IA'];
-      } else if (lang === 'es') {
-        window.typingTitles = ['AI Engineer', 'Científico de Datos', 'Fundador & Educador', 'Full-Stack Builder', 'De Auditoría a IA'];
-      } else {
-        window.typingTitles = ['AI Engineer', 'Data Scientist', 'Founder & Educator', 'Full-Stack Builder', 'From Audit to AI'];
+    // 5. Projects subtitle
+    var projSub = document.querySelector('#projects > .container > p');
+    if (projSub) {
+      if (!projSub._origEN) projSub._origEN = projSub.textContent;
+      projSub.textContent = lang === 'en' ? projSub._origEN : (PROJ_SUB[lang] || projSub._origEN);
+    }
+
+    // 6. Impact labels
+    document.querySelectorAll('.stat-label').forEach(function(el, i) {
+      if (lang === 'en') { el.textContent = origImpact[i] || el.textContent; }
+      else if (IMPACT_LABELS[i] && IMPACT_LABELS[i][lang]) { el.textContent = IMPACT_LABELS[i][lang]; }
+    });
+
+    // 7. Education
+    var eduDegH = document.querySelectorAll('.edu-degrees h3');
+    if (eduDegH[0]) { eduDegH[0].textContent = lang === 'en' ? 'Degrees' : EDU.degrees[lang]; }
+    var certH = document.querySelector('.edu-section > .container > div > div:last-child > h3');
+    if (certH) { certH.textContent = lang === 'en' ? 'Certifications' : EDU.certs[lang]; }
+    var deg1 = document.querySelectorAll('.edu-card h4');
+    if (deg1[0]) { deg1[0].textContent = lang === 'en' ? 'Bachelor of Mathematics' : EDU.deg1[lang]; }
+    if (deg1[1]) { deg1[1].textContent = lang === 'en' ? 'Bachelor of Accounting' : EDU.deg2[lang]; }
+    var school2 = document.querySelectorAll('.edu-school');
+    if (school2[1]) { school2[1].textContent = lang === 'en' ? 'UFRGS — Federal University of Rio Grande do Sul' : EDU.school2[lang]; }
+
+    // 8. Typing effect
+    if (lang === 'pt') {
+      window.typingTitles = ['AI Engineer', 'Cientista de Dados', 'Fundador & Educador', 'Full-Stack Builder', 'Da Auditoria à IA'];
+    } else if (lang === 'es') {
+      window.typingTitles = ['AI Engineer', 'Científico de Datos', 'Fundador & Educador', 'Full-Stack Builder', 'De Auditoría a IA'];
+    } else {
+      window.typingTitles = ['AI Engineer', 'Data Scientist', 'Founder & Educator', 'Full-Stack Builder', 'From Audit to AI'];
+    }
+
+    // 9. Hero CTA buttons
+    var heroBtn1 = document.querySelector('.hero-ctas .btn-primary');
+    var heroBtn2 = document.querySelector('.hero-ctas .btn-secondary');
+    if (heroBtn1) {
+      var b1 = { en: 'View My Work ↓', pt: 'Ver Meus Projetos ↓', es: 'Ver Mis Proyectos ↓' };
+      heroBtn1.innerHTML = b1[lang] || b1.en;
+    }
+    if (heroBtn2) {
+      var b2 = { en: 'Download CV ⤓', pt: 'Baixar CV ⤓', es: 'Descargar CV ⤓' };
+      heroBtn2.innerHTML = b2[lang] || b2.en;
+    }
+
+    // 10. Hero badges
+    var badges = document.querySelectorAll('.hero-badges .badge');
+    var badgeTexts = {
+      en: ['<strong>US$600K</strong> Recovered', '<strong>6,000+</strong> Trained', '<strong>900+</strong> Placed', '<strong>$1M+</strong> Revenue'],
+      pt: ['<strong>US$600K</strong> Recuperados', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Receita'],
+      es: ['<strong>US$600K</strong> Recuperados', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Ingresos'],
+    };
+    badges.forEach(function(b, i) { if (badgeTexts[lang] && badgeTexts[lang][i]) b.innerHTML = badgeTexts[lang][i]; });
+
+    // 11. Badge "Open to..."
+    var openBadge = document.querySelector('.hero .reveal:first-child .badge, section:first-of-type .badge');
+    // Actually the badge with "Open to Global Opportunities"
+    var heroBadgeSpan = document.querySelector('section:first-of-type span:not(.badge)');
+    // Find it more precisely
+    document.querySelectorAll('span').forEach(function(s) {
+      if (s.textContent.includes('Open to Global') || s.textContent.includes('Aberto a') || s.textContent.includes('Abierto a')) {
+        var t = { en: 'Open to Global Opportunities', pt: 'Aberto a Oportunidades Globais', es: 'Abierto a Oportunidades Globales' };
+        s.textContent = t[lang] || t.en;
       }
-    }
-
-    // Contact CTA button
-    var ctaBtn = document.querySelector('#contact .nav-cta, #contact a.nav-cta');
-    if (ctaBtn) {
-      var ctaTexts = { en:"Let's Talk", pt:'Fale Comigo', es:'Hablemos' };
-      ctaBtn.textContent = ctaTexts[lang] || ctaTexts.en;
-    }
-
-    // Download CV
-    var dlBtns = document.querySelectorAll('[data-dl]');
-    dlBtns.forEach(function(btn) {
-      var dlTexts = { en:'Download CV', pt:'Baixar CV', es:'Descargar CV' };
-      btn.textContent = '↓ ' + (dlTexts[lang] || dlTexts.en);
+      if (s.textContent.includes('SCROLL')) {
+        s.textContent = lang === 'en' ? 'SCROLL' : (lang === 'pt' ? 'ROLAR' : 'DESLIZAR');
+      }
     });
   };
 
-  // Set initial
+  // Init
   setLang('en');
 })();
 </script>
