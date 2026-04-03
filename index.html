@@ -761,7 +761,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 4 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #8b5cf6, #d946ef, #f43f5e);"></div>
+          <img src="fleekers.png" alt="Fleekers Growth Hub" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://fleekers.com.br/#" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -1444,103 +1444,7 @@ document.querySelectorAll('.project-card').forEach(function(card, i) {
     deg2: { pt: 'Bacharelado em Ciências Contábeis', es: 'Licenciatura en Contabilidad' },
     school2: { pt: 'UFRGS — Universidade Federal do Rio Grande do Sul', es: 'UFRGS — Universidad Federal de Rio Grande do Sul' },
   };
-  var T_OLD = { // keeping for reference only
-    'a[href="#career"]': { en:'Career', pt:'Carreira', es:'Carrera' },
-    'a[href="#projects"]': { en:'Projects', pt:'Projetos', es:'Proyectos' },
-    'a[href="#education"]': { en:'Education', pt:'Formação', es:'Formación' },
-    'a[href="#contact"]': { en:'Contact', pt:'Contato', es:'Contacto' },
-    '.nav-cta.desktop': { en:"Let's Talk", pt:'Fale Comigo', es:'Hablemos' },
-
-    // Hero subtitle
-    '.hero-subtitle': {
-      en: 'AI Engineer · Data Scientist · Founder — I come from business, speak the language of tech, and know exactly where the money is. That's why every company I touch generates millions.',
-      pt: 'AI Engineer · Cientista de Dados · Fundador — Da auditoria à IA, construindo sistemas que recuperaram US$600K, formaram 6.000+ pessoas e geraram $1M+ em receita.',
-      es: 'AI Engineer · Científico de Datos · Fundador — De auditoría a IA, construyendo sistemas que recuperaron US$600K, formaron 6.000+ personas y generaron $1M+ en ingresos.'
-    },
-
-    // Impact section
-    '#impact .section-label': { en:'Impact', pt:'Impacto', es:'Impacto' },
-
-    // About
-    '#about .section-label': { en:'About', pt:'Sobre', es:'Sobre mí' },
-    '#about .section-title': {
-      en: 'Engineering outcomes,<br>not just dashboards.',
-      pt: 'Engenheiro de resultados,<br>não apenas dashboards.',
-      es: 'Ingeniería de resultados,<br>no solo dashboards.'
-    },
-
-    // Career
-    '#career .section-label': { en:'Career', pt:'Carreira', es:'Carrera' },
-    '#career .section-title': {
-      en: 'A decade of compounding impact.',
-      pt: 'Uma década de impacto crescente.',
-      es: 'Una década de impacto creciente.'
-    },
-
-    // Projects
-    '#projects .section-label': { en:'Projects', pt:'Projetos', es:'Proyectos' },
-    '#projects .section-title': {
-      en: 'Built, shipped, running in production.',
-      pt: 'Construído, entregue, rodando em produção.',
-      es: 'Construido, entregado, corriendo en producción.'
-    },
-
-    // Tech
-    '#skills .section-label': { en:'Tech Stack', pt:'Tecnologias', es:'Tecnologías' },
-    '#skills .section-title': {
-      en: 'The tools I use to build.',
-      pt: 'As ferramentas que uso para construir.',
-      es: 'Las herramientas que uso para construir.'
-    },
-
-    // Education
-    '#education .section-label': { en:'Education', pt:'Formação', es:'Formación' },
-    '#education .section-title': {
-      en: 'Never stop learning.',
-      pt: 'Nunca parar de aprender.',
-      es: 'Nunca dejar de aprender.'
-    },
-
-    // Contact
-    '#contact .section-label': { en:'Contact', pt:'Contato', es:'Contacto' },
-    '#contact .section-title': {
-      en: "Let's build something extraordinary.",
-      pt: 'Vamos construir algo extraordinário.',
-      es: 'Construyamos algo extraordinario.'
-    },
-    '#contact .section-desc': {
-      en: "I'm open to AI/Data leadership roles, consulting engagements, and partnerships that push boundaries. Let's talk.",
-      pt: 'Estou aberto a posições de liderança em IA/Dados, consultorias e parcerias que desafiam limites. Vamos conversar.',
-      es: 'Estoy abierto a roles de liderazgo en IA/Datos, consultorías y alianzas que empujen límites. Hablemos.'
-    },
-  };
-
-  // About paragraphs (by index)
-  var aboutParas = {
-    0: {
-      en: "I'm an AI Engineer and Data Scientist based in Porto Alegre, Brazil, with a trajectory that spans <strong>audit, big data, media intelligence, education, and now artificial intelligence</strong>. My career is defined by one pattern: I walk into complex organizations, find the leverage points, and build systems that produce measurable results.",
-      pt: "Sou AI Engineer e Cientista de Dados em Porto Alegre, com uma trajetória que passa por <strong>auditoria, big data, inteligência em mídia, educação e agora inteligência artificial</strong>. Minha carreira é definida por um padrão: entro em organizações complexas, encontro os pontos de alavancagem e construo sistemas que produzem resultados mensuráveis.",
-      es: "Soy AI Engineer y Científico de Datos en Porto Alegre, Brasil, con una trayectoria que abarca <strong>auditoría, big data, inteligencia en medios, educación e inteligencia artificial</strong>. Mi carrera se define por un patrón: entro en organizaciones complejas, encuentro los puntos de apalancamiento y construyo sistemas que producen resultados medibles."
-    },
-    1: {
-      en: 'At <strong>Yara</strong>, the world\'s largest fertilizer company, I automated reconciliation processes and recovered <strong>US$600,000</strong> for my very first client. At <strong>Grupo RBS</strong>, Southern Brazil\'s largest media group, I coordinated 5 data squads and drove the <strong>largest Black Friday in company history</strong>. Then I founded <strong>Data Mundo</strong>, training over 6,000 professionals and placing 900+ of them at companies like Nubank, Shopee, and Uber.',
-      pt: 'Na <strong>Yara</strong>, a maior empresa de fertilizantes do mundo, automatizei processos de conciliação e recuperei <strong>US$600.000</strong> para o primeiro cliente. No <strong>Grupo RBS</strong>, o maior grupo de mídia do Sul do Brasil, coordenei 5 squads de dados e conduzi a <strong>maior Black Friday da história da empresa</strong>. Depois fundei a <strong>Data Mundo</strong>, formando mais de 6.000 profissionais e colocando 900+ deles em empresas como Nubank, Shopee e Uber.',
-      es: 'En <strong>Yara</strong>, la mayor empresa de fertilizantes del mundo, automaticé procesos de conciliación y recuperé <strong>US$600.000</strong> para el primer cliente. En <strong>Grupo RBS</strong>, el mayor grupo de medios del sur de Brasil, coordiné 5 squads de datos e impulsé el <strong>mayor Black Friday en la historia de la empresa</strong>. Luego fundé <strong>Data Mundo</strong>, formando más de 6.000 profesionales y colocando 900+ en empresas como Nubank, Shopee y Uber.'
-    },
-    2: {
-      en: "Today, I build <strong>end-to-end AI ecosystems</strong> -- from WhatsApp agents and ML pricing engines to predictive demand models and managerial BI platforms. I speak four languages, write production code, and lead teams. I don't just analyze data. I build products that move businesses forward.",
-      pt: "Hoje, construo <strong>ecossistemas de IA de ponta a ponta</strong> — de agentes WhatsApp e engines de pricing com ML a modelos preditivos de demanda e plataformas de BI gerencial. Falo quatro idiomas, escrevo código em produção e lidero equipes. Eu não apenas analiso dados. Eu construo produtos que movem negócios.",
-      es: "Hoy, construyo <strong>ecosistemas de IA de extremo a extremo</strong> — desde agentes WhatsApp y motores de pricing con ML hasta modelos predictivos de demanda y plataformas de BI gerencial. Hablo cuatro idiomas, escribo código en producción y lidero equipos. No solo analizo datos. Construyo productos que mueven negocios."
-    }
-  };
-
-  // Impact stat labels
-  var impactLabels = {
-    0: { en:'Business Impact', pt:'Impacto em Negócios', es:'Impacto en Negocios' },
-    1: { en:'Professionals Trained', pt:'Profissionais Formados', es:'Profesionales Formados' },
-    2: { en:'Placed in the Market', pt:'Colocados no Mercado', es:'Colocados en el Mercado' },
-    3: { en:'Revenue Built', pt:'Receita Gerada', es:'Ingresos Generados' },
-  };
+  // (old T_OLD, aboutParas, impactLabels removed — now using TRANSLATABLE, ABOUT, IMPACT_LABELS above)
 
   var currentLang = 'en';
 
