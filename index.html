@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venito Gules | AI Engineer &middot; Data Scientist &middot; Founder</title>
+<meta name="description" content="AI Engineer, Data Scientist & Founder who has trained 6,000+ professionals, recovered US$600K, and built $1M+ in revenue from scratch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --violet: #7c3aed;
+  --violet-light: #a78bfa;
+  --violet-glow: rgba(124, 58, 237, 0.4);
+  --blue: #3b82f6;
+  --blue-light: #93c5fd;
+  --cyan: #06b6d4;
+  --bg: #050507;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.06);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-bright: #f8fafc;
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--violet) transparent; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 3px; }
+
+/* ========== BACKGROUND EFFECTS ========== */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.orb {
+  position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+.orb-1 { width: 600px; height: 600px; background: rgba(124,58,237,0.12); top: -200px; left: -200px; animation-delay: 0s; }
+.orb-2 { width: 500px; height: 500px; background: rgba(59,130,246,0.08); bottom: -150px; right: -150px; animation-delay: -7s; }
+.orb-3 { width: 400px; height: 400px; background: rgba(6,182,212,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); animation-delay: -14s; }
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(40px, 30px) scale(1.02); }
+}
+
+/* ========== NAV ========== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 0 2rem; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(5, 5, 7, 0.8);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+nav.scrolled { background: rgba(5, 5, 7, 0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+.nav-logo {
+  font-weight: 800; font-size: 1.2rem; letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--violet-light), var(--blue-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none; font-size: 0.85rem;
+  font-weight: 500; letter-spacing: 0.3px; transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+  background: var(--violet); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--text-bright); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  padding: 0.5rem 1.2rem; border-radius: 8px; font-size: 0.85rem;
+  font-weight: 600; text-decoration: none; color: #fff;
+  background: linear-gradient(135deg, var(--violet), var(--blue));
+  transition: all 0.3s; border: none; cursor: pointer;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--violet-glow); }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { width: 24px; height: 2px; background: var(--text); transition: all 0.3s; border-radius: 2px; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ========== SECTIONS ========== */
+section { position: relative; z-index: 1; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--violet-light); margin-bottom: 1rem;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--violet); }
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -1px;
+  color: var(--text-bright); margin-bottom: 1.5rem; line-height: 1.2;
+}
+
+/* ========== REVEAL ANIMATION ========== */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ========== HERO ========== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 6rem 2rem 4rem; position: relative;
+}
+.hero-content { text-align: center; max-width: 900px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 1rem; border-radius: 100px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  font-size: 0.8rem; color: var(--violet-light); font-weight: 500;
+  margin-bottom: 2rem;
+}
+.hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.hero h1 {
+  font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; letter-spacing: -3px;
+  line-height: 1.05; margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #fff 0%, #e2e8f0 50%, var(--violet-light) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-typing {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--text-dim);
+  font-weight: 400; margin-bottom: 2.5rem; min-height: 2.5rem;
+}
+.hero-typing .cursor {
+  display: inline-block; width: 3px; height: 1.2em; background: var(--violet);
+  margin-left: 2px; vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.hero-badges {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-bottom: 3rem;
+}
+.hero-badges .badge {
+  padding: 0.5rem 1.2rem; border-radius: 100px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  font-size: 0.85rem; color: var(--text); font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+.hero-badges .badge strong { color: var(--violet-light); }
+
+.hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  padding: 0.85rem 2rem; border-radius: 12px; font-size: 0.95rem;
+  font-weight: 600; text-decoration: none; color: #fff;
+  background: linear-gradient(135deg, var(--violet), var(--blue));
+  border: none; cursor: pointer; transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--violet-glow); }
+
+.btn-secondary {
+  padding: 0.85rem 2rem; border-radius: 12px; font-size: 0.95rem;
+  font-weight: 600; text-decoration: none; color: var(--text);
+  background: var(--glass); border: 1px solid var(--glass-border);
+  cursor: pointer; transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--text-dim); font-size: 0.75rem; letter-spacing: 1px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+.hero-scroll .arrow { font-size: 1.2rem; }
+@keyframes scrollBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+/* ========== IMPACT NUMBERS ========== */
+.impact {
+  padding: 5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(124,58,237,0.03) 0%, transparent 100%);
+}
+.impact-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+}
+.impact-card {
+  text-align: center; padding: 2rem 1rem;
+  position: relative;
+}
+.impact-card::after {
+  content: ''; position: absolute; right: 0; top: 20%; height: 60%;
+  width: 1px; background: var(--border);
+}
+.impact-card:last-child::after { display: none; }
+
+.impact-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -2px;
+  background: linear-gradient(135deg, var(--violet-light), var(--blue-light));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1.1; margin-bottom: 0.5rem;
+}
+.impact-label { font-size: 0.85rem; color: var(--text-dim); font-weight: 500; line-height: 1.4; }
+
+/* ========== ABOUT ========== */
+.about { padding: 8rem 0; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.about-text p { color: var(--text-dim); margin-bottom: 1.5rem; font-size: 1.05rem; }
+.about-text p strong { color: var(--text-bright); font-weight: 600; }
+
+.about-highlights {
+  display: grid; gap: 1.5rem;
+}
+.highlight-card {
+  padding: 1.5rem; border-radius: 16px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px); transition: all 0.3s;
+}
+.highlight-card:hover { border-color: var(--violet); transform: translateX(4px); }
+.highlight-card .icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+.highlight-card h4 { font-size: 1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.25rem; }
+.highlight-card p { font-size: 0.85rem; color: var(--text-dim); }
+
+/* ========== TIMELINE ========== */
+.timeline-section { padding: 8rem 0; }
+.timeline { position: relative; padding: 2rem 0; }
+.timeline::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(180deg, transparent, var(--violet), var(--blue), transparent);
+  transform: translateX(-50%);
+}
+
+.timeline-item {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+  margin-bottom: 4rem; position: relative;
+}
+.timeline-item::before {
+  content: ''; position: absolute; left: 50%; top: 1.5rem;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--violet); border: 3px solid var(--bg);
+  transform: translateX(-50%); z-index: 2;
+  box-shadow: 0 0 20px var(--violet-glow), 0 0 40px rgba(124,58,237,0.2);
+}
+
+.timeline-item .tl-date {
+  text-align: right; padding-top: 0.5rem;
+  font-size: 0.85rem; font-weight: 700; color: var(--violet-light);
+  letter-spacing: 1px;
+}
+.timeline-item .tl-content {
+  padding: 1.5rem; border-radius: 16px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+.timeline-item .tl-content h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.25rem; }
+.timeline-item .tl-content .tl-company { font-size: 0.9rem; color: var(--violet-light); font-weight: 600; margin-bottom: 0.75rem; }
+.timeline-item .tl-content p { font-size: 0.9rem; color: var(--text-dim); }
+.timeline-item .tl-content .tl-highlight {
+  display: inline-block; margin-top: 0.75rem; padding: 0.3rem 0.8rem;
+  border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+  background: rgba(124,58,237,0.15); color: var(--violet-light);
+  border: 1px solid rgba(124,58,237,0.3);
+}
+
+.timeline-item:nth-child(even) .tl-date { text-align: left; order: 2; }
+.timeline-item:nth-child(even) .tl-content { order: 1; }
+
+/* ========== PROJECTS ========== */
+.projects-section { padding: 8rem 0; }
+.projects-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem;
+}
+.project-card {
+  border-radius: 20px; overflow: hidden;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.project-card:hover { transform: translateY(-8px); border-color: var(--violet); box-shadow: 0 20px 60px rgba(124,58,237,0.15); }
+
+.project-thumb {
+  height: 200px; position: relative; overflow: hidden;
+}
+.project-thumb .gradient-bg {
+  width: 100%; height: 100%;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover .gradient-bg { transform: scale(1.05); }
+
+.project-thumb .project-overlay {
+  position: absolute; inset: 0; background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.project-card:hover .project-overlay { opacity: 1; }
+.project-overlay a {
+  padding: 0.6rem 1.5rem; border-radius: 8px; font-size: 0.85rem;
+  font-weight: 600; color: #fff; text-decoration: none;
+  background: var(--violet); transition: transform 0.2s;
+}
+.project-overlay a:hover { transform: scale(1.05); }
+
+.project-info { padding: 1.5rem; }
+.project-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.5rem; }
+.project-info p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem; line-height: 1.6; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.project-tags span {
+  padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.7rem;
+  background: rgba(124,58,237,0.1); color: var(--violet-light);
+  border: 1px solid rgba(124,58,237,0.2); font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ========== TECH STACK ========== */
+.tech-section { padding: 8rem 0; }
+.tech-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.tech-category {
+  padding: 2rem; border-radius: 20px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px); transition: all 0.3s;
+}
+.tech-category:hover { border-color: var(--violet); }
+.tech-category .cat-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+.tech-category h3 { font-size: 1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 1rem; }
+.tech-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.tech-list .tech-tag {
+  padding: 0.35rem 0.8rem; border-radius: 8px; font-size: 0.8rem;
+  background: rgba(255,255,255,0.04); color: var(--text-dim); font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tech-tag:hover { color: var(--violet-light); border-color: var(--violet); background: rgba(124,58,237,0.1); }
+
+/* ========== MARQUEE ========== */
+.marquee-section {
+  padding: 4rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex; gap: 3rem; animation: marquee 30s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  font-size: 1.1rem; font-weight: 700; color: rgba(255,255,255,0.12);
+  white-space: nowrap; letter-spacing: 1px; text-transform: uppercase;
+}
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ========== EDUCATION ========== */
+.edu-section { padding: 8rem 0; }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+.edu-degrees { display: grid; gap: 1.5rem; }
+.edu-card {
+  padding: 1.5rem; border-radius: 16px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+.edu-card h4 { font-size: 1rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.25rem; }
+.edu-card .edu-school { font-size: 0.9rem; color: var(--violet-light); font-weight: 500; }
+.edu-card .edu-year { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+.cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.cert-item {
+  padding: 1rem; border-radius: 12px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  font-size: 0.8rem; color: var(--text-dim); font-weight: 500;
+  transition: all 0.3s; display: flex; align-items: center; gap: 0.5rem;
+}
+.cert-item:hover { border-color: var(--violet); color: var(--violet-light); }
+.cert-item .cert-icon { font-size: 1rem; }
+
+/* ========== CONTACT ========== */
+.contact-section {
+  padding: 8rem 0; text-align: center;
+  background: linear-gradient(180deg, transparent 0%, rgba(124,58,237,0.05) 100%);
+}
+.contact-section .section-title { font-size: clamp(2.5rem, 5vw, 4rem); }
+.contact-section p { font-size: 1.1rem; color: var(--text-dim); max-width: 600px; margin: 0 auto 3rem; }
+
+.contact-links {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;
+}
+.contact-link {
+  display: inline-flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1.5rem; border-radius: 16px;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  text-decoration: none; color: var(--text); font-weight: 500;
+  transition: all 0.3s; backdrop-filter: blur(10px);
+}
+.contact-link:hover { border-color: var(--violet); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,58,237,0.15); }
+.contact-link .cl-icon { font-size: 1.2rem; }
+.contact-link span { font-size: 0.9rem; }
+
+/* ========== FOOTER ========== */
+footer {
+  padding: 3rem 2rem; text-align: center;
+  border-top: 1px solid var(--border);
+}
+footer p { font-size: 0.8rem; color: var(--text-dim); }
+footer .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
+footer .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.3s; }
+footer .footer-links a:hover { color: var(--violet-light); }
+
+/* ========== LANGUAGES (shown in footer) ========== */
+.lang-tags { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+.lang-tag {
+  padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem;
+  background: var(--glass); border: 1px solid var(--glass-border);
+  color: var(--text-dim); font-weight: 500;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+  .timeline::before { left: 2rem; }
+  .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; padding-left: 4rem; }
+  .timeline-item::before { left: 2rem; }
+  .timeline-item .tl-date { text-align: left !important; order: 0 !important; }
+  .timeline-item .tl-content { order: 1 !important; }
+  .about-grid { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; position: fixed; top: 72px; left: 0; right: 0;
+    background: rgba(5,5,7,0.98); flex-direction: column;
+    padding: 2rem; gap: 1.5rem; border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+  }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .nav-cta.desktop { display: none; }
+
+  .impact-grid { grid-template-columns: 1fr 1fr; }
+  .impact-card::after { display: none; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .tech-categories { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .hero h1 { letter-spacing: -1.5px; }
+  .hero-badges { gap: 0.5rem; }
+  .hero-badges .badge { font-size: 0.75rem; padding: 0.4rem 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .impact-grid { grid-template-columns: 1fr; }
+  .contact-links { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-grid"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">VG</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta desktop">Let's Talk</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-badge reveal"><span class="dot"></span> Open to Global Opportunities</div>
+    <h1 class="reveal reveal-delay-1">Venito Gules</h1>
+    <div class="hero-typing reveal reveal-delay-2">
+      <span id="typed"></span><span class="cursor"></span>
+    </div>
+    <p class="hero-subtitle reveal reveal-delay-3" style="font-size:1.05rem;color:#94a3b8;max-width:640px;margin:0 auto 2rem;line-height:1.6;">AI Engineer · Data Scientist · Founder — From audit to AI, building systems that recover US$600K, train 6,000+ people, and generate $1M+ in revenue.</p>
+    <div class="hero-badges reveal reveal-delay-3">
+      <span class="badge"><strong>US$600K</strong> Recovered</span>
+      <span class="badge"><strong>6,000+</strong> Trained</span>
+      <span class="badge"><strong>900+</strong> Placed</span>
+      <span class="badge"><strong>$1M+</strong> Revenue</span>
+    </div>
+    <div class="hero-ctas reveal reveal-delay-4">
+      <a href="#projects" class="btn-primary">View My Work &darr;</a>
+      <a href="#contact" class="btn-secondary">Download CV &DownArrowBar;</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>SCROLL</span>
+    <span class="arrow">&darr;</span>
+  </div>
+</section>
+
+<!-- Impact Numbers -->
+<section class="impact" id="impact">
+  <div class="container">
+    <div class="impact-grid">
+      <div class="impact-card reveal">
+        <div class="impact-number"><span class="counter" data-target="600" data-prefix="US$" data-suffix="K">US$0</span></div>
+        <div class="impact-label stat-label">Recovered at Yara</div>
+      </div>
+      <div class="impact-card reveal reveal-delay-1">
+        <div class="impact-number"><span class="counter" data-target="6000" data-suffix="+">0</span></div>
+        <div class="impact-label stat-label">Professionals Trained</div>
+      </div>
+      <div class="impact-card reveal reveal-delay-2">
+        <div class="impact-number"><span class="counter" data-target="900" data-suffix="+">0</span></div>
+        <div class="impact-label stat-label">Placed in the Market</div>
+      </div>
+      <div class="impact-card reveal reveal-delay-3">
+        <div class="impact-number"><span class="counter" data-target="1" data-prefix="$" data-suffix="M+">$0</span></div>
+        <div class="impact-label stat-label">Revenue Built</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-label reveal">About</div>
+        <h2 class="section-title reveal reveal-delay-1">Engineering outcomes,<br>not just dashboards.</h2>
+        <p class="reveal reveal-delay-2">I'm an AI Engineer and Data Scientist based in Porto Alegre, Brazil, with a trajectory that spans <strong>audit, big data, media intelligence, education, and now artificial intelligence</strong>. My career is defined by one pattern: I walk into complex organizations, find the leverage points, and build systems that produce measurable results.</p>
+        <p class="reveal reveal-delay-3">At <strong>Yara</strong>, the world's largest fertilizer company, I automated reconciliation processes and recovered <strong>US$600,000</strong> for my very first client. At <strong>Grupo RBS</strong>, Southern Brazil's largest media group, I coordinated 5 data squads and drove the <strong>largest Black Friday in company history</strong>. Then I founded <strong>Data Mundo</strong>, training over 6,000 professionals and placing 900+ of them at companies like Nubank, Shopee, and Uber.</p>
+        <p class="reveal reveal-delay-4">Today, I build <strong>end-to-end AI ecosystems</strong> -- from WhatsApp agents and ML pricing engines to predictive demand models and managerial BI platforms. I speak four languages, write production code, and lead teams. I don't just analyze data. I build products that move businesses forward.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card reveal">
+          <div class="icon">&#9889;</div>
+          <h4>From Audit to AI</h4>
+          <p>A unique trajectory combining financial rigor with cutting-edge technology.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-1">
+          <div class="icon">&#127758;</div>
+          <h4>4 Languages</h4>
+          <p>Portuguese, English, Spanish, and Italian -- built for global teams and international markets.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-2">
+          <div class="icon">&#127891;</div>
+          <h4>Educator at Scale</h4>
+          <p>Taught 6,000+ students. 900+ now work at top tech companies worldwide.</p>
+        </div>
+        <div class="highlight-card reveal reveal-delay-3">
+          <div class="icon">&#128640;</div>
+          <h4>Builder, Not Just Analyst</h4>
+          <p>8 live production apps. Full-stack AI systems. $1M+ in self-made revenue.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Career Timeline -->
+<section class="timeline-section" id="career">
+  <div class="container">
+    <div class="section-label reveal">Career</div>
+    <h2 class="section-title reveal reveal-delay-1">A decade of compounding impact.</h2>
+
+    <div class="timeline">
+      <!-- 1 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2015 &mdash; 2019</div>
+        <div class="tl-content">
+          <h3>Audit & Accounting</h3>
+          <div class="tl-company">Grant Thornton Brasil &bull; Yara Brasil</div>
+          <p>Started in financial audit at one of the Big 8 global firms, then moved to Yara -- the world's largest fertilizer company. Automated reconciliation processes and recovered US$600,000 for the very first client engagement.</p>
+          <span class="tl-highlight">US$600K Recovered</span>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2019 &mdash; 2020</div>
+        <div class="tl-content">
+          <h3>Data Analyst</h3>
+          <div class="tl-company">Grupo A Educacao (Largest EdTech in LATAM, 3M+ users)</div>
+          <p>Built BI dashboards for Latin America's largest EdTech group. Implemented gamification analytics, supported LGPD compliance, and delivered actionable insights across the Plataforma A ecosystem.</p>
+          <span class="tl-highlight">3M+ Users Platform</span>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2020 &mdash; 2021</div>
+        <div class="tl-content">
+          <h3>Senior Data Analyst</h3>
+          <div class="tl-company">Tech6 &rarr; Sicredi &bull; T10 / Tribanco (Grupo Martins)</div>
+          <p>Allocated to Sicredi -- Brazil's first cooperative bank with 100+ years and 6M clients. Led the full migration from Tableau to Power BI. Created dashboards accessed by thousands daily. Then moved to T10 bank (Grupo Martins, R$7B revenue).</p>
+          <span class="tl-highlight">Tableau &rarr; Power BI Migration</span>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2021 &mdash; 2022</div>
+        <div class="tl-content">
+          <h3>Data & Analytics Coordinator</h3>
+          <div class="tl-company">Grupo RBS (Largest Media Group in Southern Brazil)</div>
+          <p>Built and managed 5 specialized data squads: Product, Growth, Engagement, Retention, and Sports. Led LGPD implementation across the organization. Orchestrated the company's largest Black Friday in history.</p>
+          <span class="tl-highlight">5 Squads &bull; Record Black Friday</span>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2022 &mdash; 2025</div>
+        <div class="tl-content">
+          <h3>Founder & CEO</h3>
+          <div class="tl-company">Data Mundo</div>
+          <p>Founded an EdTech from scratch and scaled it to $1M+ in revenue. Trained 6,000+ professionals in data analytics and science. 900+ graduates placed at companies like Nubank, Shopee, LinkedIn, Uber, and iFood. Consulted for Piracanjuba and Grupo Herval (25 brands, 7,000 employees).</p>
+          <span class="tl-highlight">$1M+ Revenue &bull; 6,000+ Students</span>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="timeline-item reveal">
+        <div class="tl-date">2025 &mdash; Present</div>
+        <div class="tl-content">
+          <h3>AI Engineer</h3>
+          <div class="tl-company">Data Robotics &bull; FLEEKERS (Co-Founder)</div>
+          <p>Building complete AI ecosystems: WhatsApp AI agents, inventory forecasting with ML, intelligent pricing, market basket analysis, and managerial BI with 34 AI-powered indicators. Co-founded FLEEKERS -- a marketing SaaS platform.</p>
+          <span class="tl-highlight">34 AI-Powered Indicators</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="projects-section" id="projects">
+  <div class="container">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal reveal-delay-1">Live products, real users.</h2>
+    <p class="reveal reveal-delay-2" style="color: var(--text-dim); max-width: 600px; margin-bottom: 3rem;">Every project below is live in production. Real users, real revenue, real impact. Click to explore.</p>
+
+    <div class="projects-grid">
+      <!-- 1 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);"></div>
+          <div class="project-overlay"><a href="https://datamundo.com.br" target="_blank">Visit Site &rarr;</a></div>
+        </div>
+        <div class="project-info">
+          <h3>DataMundo Platform</h3>
+          <p>AI-powered learning platform with gamification, 9 learning paths, AI-driven CV & LinkedIn reviews, and behavioral profiling quiz funnels.</p>
+          <div class="project-tags">
+            <span>Next.js</span><span>NestJS</span><span>PostgreSQL</span><span>Docker</span><span>AI/ML</span>
+          </div>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #059669, #0d9488, #06b6d4);"></div>
+          <div class="project-overlay"><a href="https://datarobotics-farma.netlify.app" target="_blank">Visit Site &rarr;</a></div>
+        </div>
+        <div class="project-info">
+          <h3>FarmaRobotics</h3>
+          <p>Complete AI ecosystem for pharmacies: WhatsApp AI agents, ML pricing, demand forecasting, market basket analysis, and 34 BI indicators.</p>
+          <div class="project-tags">
+            <span>Python</span><span>LangChain</span><span>RAG</span><span>Power BI</span><span>Firebird</span>
+          </div>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);"></div>
+          <div class="project-overlay"><a href="https://imagemobileads.com" target="_blank">Visit Site &rarr;</a></div>
+        </div>
+        <div class="project-info">
+          <h3>Image MobiLeads</h3>
+          <p>OOH vehicle advertising platform with GPS tracking, automated Asaas payments, driver gamification, and real-time campaign dashboards.</p>
+          <div class="project-tags">
+            <span>React</span><span>Supabase</span><span>Node.js</span><span>Asaas API</span><span>GPS</span>
+          </div>
+        </div>
+      </div>
+      <!-- 4 -->
+      <div class="project-card reveal">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #8b5cf6, #d946ef, #f43f5e);"></div>
+          <div class="project-overlay"><a href="#" target="_blank">Coming Soon</a></div>
+        </div>
+        <div class="project-info">
+          <h3>Fleekers Growth Hub</h3>
+          <p>Marketing SaaS with multi-tenant architecture, AI-powered post creator, and growth analytics for agencies and creators.</p>
+          <div class="project-tags">
+            <span>Next.js</span><span>Multi-tenant</span><span>AI</span><span>Redis</span><span>Docker</span>
+          </div>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #ea580c, #f97316, #facc15);"></div>
+          <div class="project-overlay"><a href="https://otimizarest.com" target="_blank">Visit Site &rarr;</a></div>
+        </div>
+        <div class="project-info">
+          <h3>OtimizaRest</h3>
+          <p>BI + AI for restaurants. Intelligent dashboards, cost optimization, and predictive analytics for food service operations.</p>
+          <div class="project-tags">
+            <span>React</span><span>Node.js</span><span>Power BI</span><span>ML</span><span>PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-thumb">
+          <div class="gradient-bg" style="background: linear-gradient(135deg, #1e40af, #3b82f6, #38bdf8);"></div>
+          <div class="project-overlay"><a href="https://barbeariaporto.com.br" target="_blank">Visit Site &rarr;</a></div>
+        </div>
+        <div class="project-info">
+          <h3>Barbearia Porto + TatamePro + GPS</h3>
+          <p>Three additional full-stack apps: barbershop booking system, BJJ academy management, and church management platform. All live in production.</p>
+          <div class="project-tags">
+            <span>Node.js</span><span>SQLite</span><span>Turso</span><span>Express</span><span>Full Stack</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tech Stack -->
+<section class="tech-section" id="skills">
+  <div class="container">
+    <div class="section-label reveal">Tech Stack</div>
+    <h2 class="section-title reveal reveal-delay-1">Tools that ship.</h2>
+
+    <div class="tech-categories">
+      <div class="tech-category reveal">
+        <div class="cat-icon">&#129302;</div>
+        <h3>AI / Machine Learning</h3>
+        <div class="tech-list">
+          <span class="tech-tag">LLMs</span>
+          <span class="tech-tag">RAG</span>
+          <span class="tech-tag">FAISS</span>
+          <span class="tech-tag">Pinecone</span>
+          <span class="tech-tag">Chroma</span>
+          <span class="tech-tag">LangChain</span>
+          <span class="tech-tag">LangGraph</span>
+          <span class="tech-tag">Predictive Models</span>
+          <span class="tech-tag">Market Basket</span>
+          <span class="tech-tag">MLOps</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-1">
+        <div class="cat-icon">&#128202;</div>
+        <h3>Data & Analytics</h3>
+        <div class="tech-list">
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Power BI</span>
+          <span class="tech-tag">Tableau</span>
+          <span class="tech-tag">Excel</span>
+          <span class="tech-tag">ETL</span>
+          <span class="tech-tag">Azure Data Factory</span>
+          <span class="tech-tag">dbt</span>
+          <span class="tech-tag">BigQuery</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-2">
+        <div class="cat-icon">&#9881;&#65039;</div>
+        <h3>Engineering</h3>
+        <div class="tech-list">
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">Kubernetes</span>
+          <span class="tech-tag">CI/CD</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">Firebird</span>
+          <span class="tech-tag">APIs</span>
+          <span class="tech-tag">Redis</span>
+          <span class="tech-tag">Nginx</span>
+        </div>
+      </div>
+      <div class="tech-category reveal">
+        <div class="cat-icon">&#128187;</div>
+        <h3>Languages</h3>
+        <div class="tech-list">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">TypeScript</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">R</span>
+          <span class="tech-tag">VBA</span>
+          <span class="tech-tag">SQL</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-1">
+        <div class="cat-icon">&#128296;</div>
+        <h3>Frameworks</h3>
+        <div class="tech-list">
+          <span class="tech-tag">Next.js</span>
+          <span class="tech-tag">NestJS</span>
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Express</span>
+          <span class="tech-tag">FastAPI</span>
+        </div>
+      </div>
+      <div class="tech-category reveal reveal-delay-2">
+        <div class="cat-icon">&#9729;&#65039;</div>
+        <h3>Cloud</h3>
+        <div class="tech-list">
+          <span class="tech-tag">AWS</span>
+          <span class="tech-tag">GCP</span>
+          <span class="tech-tag">Azure</span>
+          <span class="tech-tag">Supabase</span>
+          <span class="tech-tag">Netlify</span>
+          <span class="tech-tag">VPS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Companies Marquee -->
+<section class="marquee-section">
+  <div class="marquee-track" id="marquee">
+    <span class="marquee-item">Yara</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Sicredi</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo RBS</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Piracanjuba</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo Herval</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo A Educacao</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">T10 / Tribanco</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Nubank</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Shopee</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Uber</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">iFood</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">LinkedIn</span>
+    <span class="marquee-item">&bull;</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">Yara</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Sicredi</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo RBS</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Piracanjuba</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo Herval</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Grupo A Educacao</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">T10 / Tribanco</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Nubank</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Shopee</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">Uber</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">iFood</span>
+    <span class="marquee-item">&bull;</span>
+    <span class="marquee-item">LinkedIn</span>
+    <span class="marquee-item">&bull;</span>
+  </div>
+</section>
+
+<!-- Education & Certifications -->
+<section class="edu-section" id="education">
+  <div class="container">
+    <div class="section-label reveal">Education & Certifications</div>
+    <h2 class="section-title reveal reveal-delay-1">Always learning.</h2>
+
+    <div class="edu-grid">
+      <div class="edu-degrees">
+        <h3 class="reveal" style="font-size: 1rem; color: var(--violet-light); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Degrees</h3>
+        <div class="edu-card reveal">
+          <h4>Bachelor of Mathematics</h4>
+          <div class="edu-school">Cruzeiro do Sul University</div>
+          <div class="edu-year">2024 &mdash; 2026</div>
+        </div>
+        <div class="edu-card reveal reveal-delay-1">
+          <h4>Bachelor of Accounting</h4>
+          <div class="edu-school">UFRGS &mdash; Federal University of Rio Grande do Sul</div>
+          <div class="edu-year">2015 &mdash; 2019</div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="reveal" style="font-size: 1rem; color: var(--violet-light); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600;">Certifications</h3>
+        <div class="cert-grid">
+          <div class="cert-item reveal"><span class="cert-icon">&#127891;</span> Data Science</div>
+          <div class="cert-item reveal reveal-delay-1"><span class="cert-icon">&#129302;</span> RPA Architect</div>
+          <div class="cert-item reveal reveal-delay-2"><span class="cert-icon">&#128274;</span> Data Governance</div>
+          <div class="cert-item reveal reveal-delay-3"><span class="cert-icon">&#128013;</span> Python for Data Analysis</div>
+          <div class="cert-item reveal"><span class="cert-icon">&#128202;</span> Data Visualization & Dashboards</div>
+          <div class="cert-item reveal reveal-delay-1"><span class="cert-icon">&#127908;</span> Communication & Public Speaking</div>
+          <div class="cert-item reveal reveal-delay-2"><span class="cert-icon">&#128640;</span> G4 Traction (Business Growth)</div>
+          <div class="cert-item reveal reveal-delay-3"><span class="cert-icon">&#128221;</span> Content Marketing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content: center;">Let's Connect</div>
+    <h2 class="section-title reveal reveal-delay-1">Ready to build<br>something remarkable?</h2>
+    <p class="reveal reveal-delay-2">Whether you need an AI engineer, a data strategist, or a technical co-founder, I'd love to hear about your challenge.</p>
+
+    <div class="contact-links reveal reveal-delay-3">
+      <a href="mailto:venitogules@hotmail.com" class="contact-link">
+        <span class="cl-icon">&#9993;</span>
+        <span>venitogules@hotmail.com</span>
+      </a>
+      <a href="https://linkedin.com/in/venitogules" target="_blank" class="contact-link">
+        <span class="cl-icon">&#128279;</span>
+        <span>linkedin.com/in/venitogules</span>
+      </a>
+      <a href="https://github.com/VENITOGULES" target="_blank" class="contact-link">
+        <span class="cl-icon">&#128187;</span>
+        <span>github.com/VENITOGULES</span>
+      </a>
+      <a href="https://wa.me/5551982224584" target="_blank" class="contact-link">
+        <span class="cl-icon">&#128242;</span>
+        <span>+55 51 98222-4584</span>
+      </a>
+    </div>
+
+    <div class="lang-tags reveal reveal-delay-4">
+      <span class="lang-tag">&#127463;&#127479; Portuguese (Native)</span>
+      <span class="lang-tag">&#127468;&#127463; English (Bilingual)</span>
+      <span class="lang-tag">&#127466;&#127480; Spanish (Bilingual)</span>
+      <span class="lang-tag">&#127470;&#127481; Italian (Professional)</span>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/venitogules" target="_blank">LinkedIn</a>
+    <a href="https://github.com/VENITOGULES" target="_blank">GitHub</a>
+    <a href="mailto:venitogules@hotmail.com">Email</a>
+    <a href="https://wa.me/5551982224584" target="_blank">WhatsApp</a>
+  </div>
+  <p>Designed & built by Venito Gules &mdash; Porto Alegre, Brazil</p>
+</footer>
+
+<script>
+// ========== NAV SCROLL ==========
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ========== HAMBURGER ==========
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ========== TYPING EFFECT ==========
+const phrases = [
+  'AI Engineer',
+  'Data Scientist',
+  'Founder & Educator',
+  'Full-Stack Builder',
+  'From Audit to AI'
+];
+const typedEl = document.getElementById('typed');
+let phraseIndex = 0, charIndex = 0, isDeleting = false;
+
+function typeLoop() {
+  const current = phrases[phraseIndex];
+  if (!isDeleting) {
+    typedEl.textContent = current.substring(0, charIndex + 1);
+    charIndex++;
+    if (charIndex === current.length) {
+      isDeleting = true;
+      setTimeout(typeLoop, 2000);
+      return;
+    }
+    setTimeout(typeLoop, 80);
+  } else {
+    typedEl.textContent = current.substring(0, charIndex - 1);
+    charIndex--;
+    if (charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      setTimeout(typeLoop, 400);
+      return;
+    }
+    setTimeout(typeLoop, 40);
+  }
+}
+typeLoop();
+
+// ========== REVEAL ON SCROLL ==========
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ========== ANIMATED COUNTERS ==========
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const duration = 2000;
+  const start = performance.now();
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.round(eased * target);
+
+    el.textContent = prefix + current.toLocaleString() + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    }
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.dataset.animated) {
+      entry.target.dataset.animated = 'true';
+      animateCounter(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ========== PARALLAX ORBS ==========
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      document.querySelector('.orb-1').style.transform = `translate(${scrollY * 0.02}px, ${scrollY * 0.03}px)`;
+      document.querySelector('.orb-2').style.transform = `translate(${-scrollY * 0.015}px, ${-scrollY * 0.02}px)`;
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+</script>
+
+<!-- ========== LANGUAGE SWITCHER ========== -->
+<div id="lang-switcher" style="position:fixed;top:20px;right:80px;z-index:999;display:flex;gap:6px;">
+  <button onclick="setLang('en')" id="btn-en" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="English">🇺🇸</button>
+  <button onclick="setLang('pt')" id="btn-pt" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="Português">🇧🇷</button>
+  <button onclick="setLang('es')" id="btn-es" style="background:none;border:2px solid rgba(255,255,255,0.15);border-radius:8px;padding:4px 8px;cursor:pointer;font-size:18px;line-height:1;transition:all .2s;" title="Español">🇪🇸</button>
+</div>
+
+<script>
+(function(){
+  // Translation dictionary - maps CSS selector → {en, pt, es}
+  var T = {
+    // Nav
+    'a[href="#about"]': { en:'About', pt:'Sobre', es:'Sobre mí' },
+    'a[href="#career"]': { en:'Career', pt:'Carreira', es:'Carrera' },
+    'a[href="#projects"]': { en:'Projects', pt:'Projetos', es:'Proyectos' },
+    'a[href="#education"]': { en:'Education', pt:'Formação', es:'Formación' },
+    'a[href="#contact"]': { en:'Contact', pt:'Contato', es:'Contacto' },
+    '.nav-cta.desktop': { en:"Let's Talk", pt:'Fale Comigo', es:'Hablemos' },
+
+    // Hero subtitle
+    '.hero-subtitle': {
+      en: 'AI Engineer · Data Scientist · Founder — From audit to AI, building systems that recover US$600K, train 6,000+ people, and generate $1M+ in revenue.',
+      pt: 'AI Engineer · Cientista de Dados · Fundador — Da auditoria à IA, construindo sistemas que recuperaram US$600K, formaram 6.000+ pessoas e geraram $1M+ em receita.',
+      es: 'AI Engineer · Científico de Datos · Fundador — De auditoría a IA, construyendo sistemas que recuperaron US$600K, formaron 6.000+ personas y generaron $1M+ en ingresos.'
+    },
+
+    // Impact section
+    '#impact .section-label': { en:'Impact', pt:'Impacto', es:'Impacto' },
+
+    // About
+    '#about .section-label': { en:'About', pt:'Sobre', es:'Sobre mí' },
+    '#about .section-title': {
+      en: 'Engineering outcomes,<br>not just dashboards.',
+      pt: 'Engenheiro de resultados,<br>não apenas dashboards.',
+      es: 'Ingeniería de resultados,<br>no solo dashboards.'
+    },
+
+    // Career
+    '#career .section-label': { en:'Career', pt:'Carreira', es:'Carrera' },
+    '#career .section-title': {
+      en: 'A decade of compounding impact.',
+      pt: 'Uma década de impacto crescente.',
+      es: 'Una década de impacto creciente.'
+    },
+
+    // Projects
+    '#projects .section-label': { en:'Projects', pt:'Projetos', es:'Proyectos' },
+    '#projects .section-title': {
+      en: 'Built, shipped, running in production.',
+      pt: 'Construído, entregue, rodando em produção.',
+      es: 'Construido, entregado, corriendo en producción.'
+    },
+
+    // Tech
+    '#skills .section-label': { en:'Tech Stack', pt:'Tecnologias', es:'Tecnologías' },
+    '#skills .section-title': {
+      en: 'The tools I use to build.',
+      pt: 'As ferramentas que uso para construir.',
+      es: 'Las herramientas que uso para construir.'
+    },
+
+    // Education
+    '#education .section-label': { en:'Education', pt:'Formação', es:'Formación' },
+    '#education .section-title': {
+      en: 'Never stop learning.',
+      pt: 'Nunca parar de aprender.',
+      es: 'Nunca dejar de aprender.'
+    },
+
+    // Contact
+    '#contact .section-label': { en:'Contact', pt:'Contato', es:'Contacto' },
+    '#contact .section-title': {
+      en: "Let's build something extraordinary.",
+      pt: 'Vamos construir algo extraordinário.',
+      es: 'Construyamos algo extraordinario.'
+    },
+    '#contact .section-desc': {
+      en: "I'm open to AI/Data leadership roles, consulting engagements, and partnerships that push boundaries. Let's talk.",
+      pt: 'Estou aberto a posições de liderança em IA/Dados, consultorias e parcerias que desafiam limites. Vamos conversar.',
+      es: 'Estoy abierto a roles de liderazgo en IA/Datos, consultorías y alianzas que empujen límites. Hablemos.'
+    },
+  };
+
+  // About paragraphs (by index)
+  var aboutParas = {
+    0: {
+      en: "I'm an AI Engineer and Data Scientist based in Porto Alegre, Brazil, with a trajectory that spans <strong>audit, big data, media intelligence, education, and now artificial intelligence</strong>. My career is defined by one pattern: I walk into complex organizations, find the leverage points, and build systems that produce measurable results.",
+      pt: "Sou AI Engineer e Cientista de Dados em Porto Alegre, com uma trajetória que passa por <strong>auditoria, big data, inteligência em mídia, educação e agora inteligência artificial</strong>. Minha carreira é definida por um padrão: entro em organizações complexas, encontro os pontos de alavancagem e construo sistemas que produzem resultados mensuráveis.",
+      es: "Soy AI Engineer y Científico de Datos en Porto Alegre, Brasil, con una trayectoria que abarca <strong>auditoría, big data, inteligencia en medios, educación e inteligencia artificial</strong>. Mi carrera se define por un patrón: entro en organizaciones complejas, encuentro los puntos de apalancamiento y construyo sistemas que producen resultados medibles."
+    },
+    1: {
+      en: 'At <strong>Yara</strong>, the world\'s largest fertilizer company, I automated reconciliation processes and recovered <strong>US$600,000</strong> for my very first client. At <strong>Grupo RBS</strong>, Southern Brazil\'s largest media group, I coordinated 5 data squads and drove the <strong>largest Black Friday in company history</strong>. Then I founded <strong>Data Mundo</strong>, training over 6,000 professionals and placing 900+ of them at companies like Nubank, Shopee, and Uber.',
+      pt: 'Na <strong>Yara</strong>, a maior empresa de fertilizantes do mundo, automatizei processos de conciliação e recuperei <strong>US$600.000</strong> para o primeiro cliente. No <strong>Grupo RBS</strong>, o maior grupo de mídia do Sul do Brasil, coordenei 5 squads de dados e conduzi a <strong>maior Black Friday da história da empresa</strong>. Depois fundei a <strong>Data Mundo</strong>, formando mais de 6.000 profissionais e colocando 900+ deles em empresas como Nubank, Shopee e Uber.',
+      es: 'En <strong>Yara</strong>, la mayor empresa de fertilizantes del mundo, automaticé procesos de conciliación y recuperé <strong>US$600.000</strong> para el primer cliente. En <strong>Grupo RBS</strong>, el mayor grupo de medios del sur de Brasil, coordiné 5 squads de datos e impulsé el <strong>mayor Black Friday en la historia de la empresa</strong>. Luego fundé <strong>Data Mundo</strong>, formando más de 6.000 profesionales y colocando 900+ en empresas como Nubank, Shopee y Uber.'
+    },
+    2: {
+      en: "Today, I build <strong>end-to-end AI ecosystems</strong> -- from WhatsApp agents and ML pricing engines to predictive demand models and managerial BI platforms. I speak four languages, write production code, and lead teams. I don't just analyze data. I build products that move businesses forward.",
+      pt: "Hoje, construo <strong>ecossistemas de IA de ponta a ponta</strong> — de agentes WhatsApp e engines de pricing com ML a modelos preditivos de demanda e plataformas de BI gerencial. Falo quatro idiomas, escrevo código em produção e lidero equipes. Eu não apenas analiso dados. Eu construo produtos que movem negócios.",
+      es: "Hoy, construyo <strong>ecosistemas de IA de extremo a extremo</strong> — desde agentes WhatsApp y motores de pricing con ML hasta modelos predictivos de demanda y plataformas de BI gerencial. Hablo cuatro idiomas, escribo código en producción y lidero equipos. No solo analizo datos. Construyo productos que mueven negocios."
+    }
+  };
+
+  // Impact stat labels
+  var impactLabels = {
+    0: { en:'Recovered at Yara', pt:'Recuperados na Yara', es:'Recuperados en Yara' },
+    1: { en:'Professionals Trained', pt:'Profissionais Formados', es:'Profesionales Formados' },
+    2: { en:'Placed in the Market', pt:'Colocados no Mercado', es:'Colocados en el Mercado' },
+    3: { en:'Revenue Built', pt:'Receita Gerada', es:'Ingresos Generados' },
+  };
+
+  var currentLang = 'en';
+
+  window.setLang = function(lang) {
+    currentLang = lang;
+
+    // Update button borders
+    document.getElementById('btn-en').style.borderColor = lang === 'en' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
+    document.getElementById('btn-pt').style.borderColor = lang === 'pt' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
+    document.getElementById('btn-es').style.borderColor = lang === 'es' ? '#7c3aed' : 'rgba(255,255,255,0.15)';
+
+    // Apply selector-based translations
+    Object.keys(T).forEach(function(sel) {
+      var els = document.querySelectorAll(sel);
+      els.forEach(function(el) {
+        var text = T[sel][lang];
+        if (text) el.innerHTML = text;
+      });
+    });
+
+    // About paragraphs
+    var aboutPs = document.querySelectorAll('#about .about-text p');
+    aboutPs.forEach(function(p, i) {
+      if (aboutParas[i] && aboutParas[i][lang]) {
+        p.innerHTML = aboutParas[i][lang];
+      }
+    });
+
+    // Impact labels
+    var impactEls = document.querySelectorAll('.stat-label');
+    impactEls.forEach(function(el, i) {
+      if (impactLabels[i] && impactLabels[i][lang]) {
+        el.textContent = impactLabels[i][lang];
+      }
+    });
+
+    // Typing effect titles
+    if (window.typingTitles) {
+      if (lang === 'pt') {
+        window.typingTitles = ['AI Engineer', 'Cientista de Dados', 'Fundador & Educador', 'Full-Stack Builder', 'Da Auditoria à IA'];
+      } else if (lang === 'es') {
+        window.typingTitles = ['AI Engineer', 'Científico de Datos', 'Fundador & Educador', 'Full-Stack Builder', 'De Auditoría a IA'];
+      } else {
+        window.typingTitles = ['AI Engineer', 'Data Scientist', 'Founder & Educator', 'Full-Stack Builder', 'From Audit to AI'];
+      }
+    }
+
+    // Contact CTA button
+    var ctaBtn = document.querySelector('#contact .nav-cta, #contact a.nav-cta');
+    if (ctaBtn) {
+      var ctaTexts = { en:"Let's Talk", pt:'Fale Comigo', es:'Hablemos' };
+      ctaBtn.textContent = ctaTexts[lang] || ctaTexts.en;
+    }
+
+    // Download CV
+    var dlBtns = document.querySelectorAll('[data-dl]');
+    dlBtns.forEach(function(btn) {
+      var dlTexts = { en:'Download CV', pt:'Baixar CV', es:'Descargar CV' };
+      btn.textContent = '↓ ' + (dlTexts[lang] || dlTexts.en);
+    });
+  };
+
+  // Set initial
+  setLang('en');
+})();
+</script>
+</body>
+</html>
