@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Venito Gules | AI Engineer &middot; Data Scientist &middot; Founder</title>
-<meta name="description" content="AI Engineer, Data Scientist & Founder who has trained 6,000+ professionals, recovered US$600K, and built $1M+ in revenue from scratch.">
+<meta name="description" content="AI Engineer, Data Scientist & Founder. From business to tech — trained 6,000+ professionals, placed 900+ at top companies, built $1M+ in revenue. I know where the money is.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -346,6 +346,43 @@ section { position: relative; z-index: 1; }
   font-family: 'JetBrains Mono', monospace;
 }
 
+/* Project card 3D tilt */
+.project-card { perspective: 1000px; }
+.project-card:hover { transform: translateY(-8px) rotateX(2deg); box-shadow: 0 20px 60px -15px rgba(124,58,237,0.3); }
+
+/* Project modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center;
+  padding: 2rem; opacity: 0; transition: opacity 0.3s;
+}
+.modal-overlay.active { display: flex; opacity: 1; }
+.modal-content {
+  background: #0a0a12; border: 1px solid var(--glass-border); border-radius: 24px;
+  max-width: 700px; width: 100%; max-height: 85vh; overflow-y: auto;
+  padding: 2.5rem; position: relative;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem; background: none; border: none;
+  color: var(--text-dim); font-size: 1.5rem; cursor: pointer; padding: 0.5rem;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: #fff; }
+.modal-img { width: 100%; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border); }
+.modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; }
+.modal-subtitle { font-size: 0.85rem; color: var(--violet-light); margin-bottom: 1rem; }
+.modal-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 1.5rem; }
+.modal-tech-title { font-size: 0.75rem; color: var(--violet-light); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.75rem; font-weight: 600; }
+.modal-tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+.modal-tech-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-dim); padding: 0.5rem 0.75rem; background: var(--glass); border-radius: 8px; border: 1px solid var(--border); }
+.modal-tech-item span:first-child { color: var(--violet-light); font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; }
+.modal-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.modal-metric { text-align: center; padding: 1rem; background: var(--glass); border-radius: 12px; border: 1px solid var(--border); }
+.modal-metric-val { font-size: 1.3rem; font-weight: 800; color: var(--violet-light); }
+.modal-metric-lbl { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-top: 0.25rem; }
+.modal-cta { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, var(--violet), var(--blue)); border-radius: 10px; color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.3s; }
+.modal-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--violet-glow); }
+
 /* ========== TECH STACK ========== */
 .tech-section { padding: 8rem 0; }
 .tech-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -521,9 +558,9 @@ footer .footer-links a:hover { color: var(--violet-light); }
     <div class="hero-typing reveal reveal-delay-2">
       <span id="typed"></span><span class="cursor"></span>
     </div>
-    <p class="hero-subtitle reveal reveal-delay-3" style="font-size:1.05rem;color:#94a3b8;max-width:640px;margin:0 auto 2rem;line-height:1.6;">AI Engineer · Data Scientist · Founder — From audit to AI, building systems that recover US$600K, train 6,000+ people, and generate $1M+ in revenue.</p>
+    <p class="hero-subtitle reveal reveal-delay-3" style="font-size:1.05rem;color:#94a3b8;max-width:640px;margin:0 auto 2rem;line-height:1.6;">AI Engineer · Data Scientist · Founder — I come from business, speak the language of tech, and know exactly where the money is. That's why every company I touch generates millions.</p>
     <div class="hero-badges reveal reveal-delay-3">
-      <span class="badge"><strong>US$600K</strong> Recovered</span>
+      <span class="badge"><strong>Millions</strong> in Impact</span>
       <span class="badge"><strong>6,000+</strong> Trained</span>
       <span class="badge"><strong>900+</strong> Placed</span>
       <span class="badge"><strong>$1M+</strong> Revenue</span>
@@ -544,8 +581,8 @@ footer .footer-links a:hover { color: var(--violet-light); }
   <div class="container">
     <div class="impact-grid">
       <div class="impact-card reveal">
-        <div class="impact-number"><span class="counter" data-target="600" data-prefix="US$" data-suffix="K">US$0</span></div>
-        <div class="impact-label stat-label">Recovered at Yara</div>
+        <div class="impact-number" style="font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--violet-light),var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Millions</div>
+        <div class="impact-label stat-label">in Business Results</div>
       </div>
       <div class="impact-card reveal reveal-delay-1">
         <div class="impact-number"><span class="counter" data-target="6000" data-suffix="+">0</span></div>
@@ -570,9 +607,9 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <div class="about-text">
         <div class="section-label reveal">About</div>
         <h2 class="section-title reveal reveal-delay-1">Engineering outcomes,<br>not just dashboards.</h2>
-        <p class="reveal reveal-delay-2">I'm an AI Engineer and Data Scientist based in Porto Alegre, Brazil, with a trajectory that spans <strong>audit, big data, media intelligence, education, and now artificial intelligence</strong>. My career is defined by one pattern: I walk into complex organizations, find the leverage points, and build systems that produce measurable results.</p>
-        <p class="reveal reveal-delay-3">At <strong>Yara</strong>, the world's largest fertilizer company, I automated reconciliation processes and recovered <strong>US$600,000</strong> for my very first client. At <strong>Grupo RBS</strong>, Southern Brazil's largest media group, I coordinated 5 data squads and drove the <strong>largest Black Friday in company history</strong>. Then I founded <strong>Data Mundo</strong>, training over 6,000 professionals and placing 900+ of them at companies like Nubank, Shopee, and Uber.</p>
-        <p class="reveal reveal-delay-4">Today, I build <strong>end-to-end AI ecosystems</strong> -- from WhatsApp agents and ML pricing engines to predictive demand models and managerial BI platforms. I speak four languages, write production code, and lead teams. I don't just analyze data. I build products that move businesses forward.</p>
+        <p class="reveal reveal-delay-2">Most data people come from tech. <strong>I come from business.</strong> I started in audit and accounting at <strong>Grant Thornton</strong> and <strong>Yara</strong> (world's largest fertilizer company), where I learned one thing that changed everything: <strong>where the money actually is</strong>. That instinct — knowing which number moves the P&L — is what separates dashboards that get ignored from systems that generate millions.</p>
+        <p class="reveal reveal-delay-3">At <strong>Grupo RBS</strong>, I coordinated 5 data squads and drove the <strong>largest Black Friday in company history</strong>. At <strong>Sicredi</strong> (Brazil's first cooperative bank, 6M clients), I led the Tableau → Power BI migration used by thousands daily. I consulted for <strong>Piracanjuba</strong> (Brazil's largest dairy) and <strong>Grupo Herval</strong> (25 brands, 7,000 employees, Apple's largest reseller in LATAM). Then I founded <strong>Data Mundo</strong> — trained 6,000+ professionals, placed 900+ at Nubank, Shopee, Uber — and built it from zero to <strong>$1M+ in revenue</strong>.</p>
+        <p class="reveal reveal-delay-4">Today, I build <strong>end-to-end AI ecosystems</strong> — from WhatsApp agents and ML pricing engines to predictive demand models and managerial BI. I speak four languages (lived 3 months in Spain to learn Spanish), write production code, and lead teams. I bridge the gap between business strategy and technical execution. That's my superpower.</p>
       </div>
       <div class="about-highlights">
         <div class="highlight-card reveal">
@@ -613,8 +650,8 @@ footer .footer-links a:hover { color: var(--violet-light); }
         <div class="tl-content">
           <h3>Audit & Accounting</h3>
           <div class="tl-company">Grant Thornton Brasil &bull; Yara Brasil</div>
-          <p>Started in financial audit at one of the Big 8 global firms, then moved to Yara -- the world's largest fertilizer company. Automated reconciliation processes and recovered US$600,000 for the very first client engagement.</p>
-          <span class="tl-highlight">US$600K Recovered</span>
+          <p>Started in financial audit at Grant Thornton (Big 8 global), then Yara — the world's largest fertilizer company. This is where I learned to see business through numbers. Automated intercompany reconciliation across countries, generating millions in recovered value and operational savings.</p>
+          <span class="tl-highlight">Business + Data DNA</span>
         </div>
       </div>
       <!-- 2 -->
@@ -682,7 +719,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 1 -->
       <div class="project-card reveal">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #7c3aed, #3b82f6, #06b6d4);"></div>
+          <img src="datamundo.png" alt="DataMundo Platform" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://datamundo.com.br" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -696,7 +733,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 2 -->
       <div class="project-card reveal reveal-delay-1">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #059669, #0d9488, #06b6d4);"></div>
+          <img src="farmarobotics.png" alt="FarmaRobotics" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://datarobotics-farma.netlify.app" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -710,7 +747,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 3 -->
       <div class="project-card reveal reveal-delay-2">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #f59e0b, #ef4444, #ec4899);"></div>
+          <img src="mobileleads.png" alt="Image MobiLeads" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://imagemobileads.com" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -738,7 +775,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 5 -->
       <div class="project-card reveal reveal-delay-1">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #ea580c, #f97316, #facc15);"></div>
+          <img src="otimizarest.png" alt="OtimizaRest" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://otimizarest.com" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -752,7 +789,7 @@ footer .footer-links a:hover { color: var(--violet-light); }
       <!-- 6 -->
       <div class="project-card reveal reveal-delay-2">
         <div class="project-thumb">
-          <div class="gradient-bg" style="background: linear-gradient(135deg, #1e40af, #3b82f6, #38bdf8);"></div>
+          <img src="barbearia.png" alt="Barbearia Porto" style="width:100%;height:100%;object-fit:cover;">
           <div class="project-overlay"><a href="https://barbeariaporto.com.br" target="_blank">Visit Site &rarr;</a></div>
         </div>
         <div class="project-info">
@@ -952,6 +989,42 @@ footer .footer-links a:hover { color: var(--violet-light); }
   </div>
 </section>
 
+<!-- Beyond Code -->
+<section class="personal-section" id="beyond" style="padding: 6rem 0;">
+  <div class="container">
+    <div class="section-label reveal" style="justify-content:center;">Beyond Code</div>
+    <h2 class="section-title reveal reveal-delay-1" style="text-align:center;">The person behind<br>the engineer.</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:3rem;">
+
+      <div class="reveal" style="background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">🌍</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--violet-light);">24</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);margin-top:0.25rem;">Countries explored<br>Lived in Spain to learn Spanish</div>
+      </div>
+
+      <div class="reveal reveal-delay-1" style="background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">🗣️</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--blue-light);">4</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);margin-top:0.25rem;">Languages spoken<br>fluently</div>
+      </div>
+
+      <div class="reveal reveal-delay-2" style="background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">👨‍👩‍👧‍👦</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--text-bright);margin-top:0.5rem;">Husband & Father</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);margin-top:0.25rem;">Married to Camila.<br>Dad of Davi Venito & Lavínia.</div>
+      </div>
+
+      <div class="reveal reveal-delay-3" style="background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;text-align:center;">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">🎯</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--text-bright);margin-top:0.5rem;">Mission</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);margin-top:0.25rem;">Use data & AI to create<br>global impact from Brazil.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- Contact -->
 <section class="contact-section" id="contact">
   <div class="container">
@@ -986,6 +1059,21 @@ footer .footer-links a:hover { color: var(--violet-light); }
     </div>
   </div>
 </section>
+
+<!-- Project Modal -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <img class="modal-img" id="modal-img" src="" alt="">
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-subtitle" id="modal-subtitle"></div>
+    <div class="modal-desc" id="modal-desc"></div>
+    <div class="modal-metrics" id="modal-metrics"></div>
+    <div class="modal-tech-title">Architecture & Stack</div>
+    <div class="modal-tech-grid" id="modal-tech"></div>
+    <a class="modal-cta" id="modal-cta" href="#" target="_blank">Visit Live Site &rarr;</a>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer>
@@ -1125,6 +1213,129 @@ window.addEventListener('scroll', () => {
     ticking = true;
   }
 });
+
+// ========== PROJECT MODALS ==========
+var projectData = [
+  {
+    title: 'DataMundo Platform',
+    subtitle: 'AI-Powered EdTech · datamundo.com.br',
+    img: 'datamundo.png',
+    url: 'https://datamundo.com.br',
+    desc: 'A complete AI-powered learning platform that has trained 6,000+ professionals in data analytics and science. Features 9 learning paths, interactive SQL sandbox, AI-driven CV and LinkedIn reviews, gamification with XP and levels, behavioral profiling quiz funnels that personalize the entire sales page based on 15 quiz variables and 7 psychological archetypes.',
+    metrics: [
+      { val: '6,000+', lbl: 'Students' },
+      { val: '900+', lbl: 'Placed' },
+      { val: '$1M+', lbl: 'Revenue' },
+    ],
+    tech: ['Next.js 14', 'NestJS', 'PostgreSQL 16', 'Redis', 'Prisma ORM', 'Claude AI API', 'Docker', 'BullMQ', 'Tailwind CSS', 'Google Apps Script']
+  },
+  {
+    title: 'FarmaRobotics',
+    subtitle: 'AI Ecosystem for Pharmacies · Data Robotics',
+    img: 'farmarobotics.png',
+    url: 'https://datarobotics-farma.netlify.app',
+    desc: 'End-to-end AI ecosystem transforming drugstores into competitive powerhouses. Includes WhatsApp AI agent for 24/7 sales, ML-powered inventory forecasting, intelligent pricing engine, market basket analysis, regional marketing with microdata, and a managerial BI platform with 34 AI-powered indicators built on Firebird database.',
+    metrics: [
+      { val: '34', lbl: 'AI Indicators' },
+      { val: '6', lbl: 'AI Modules' },
+      { val: '24/7', lbl: 'AI Agent' },
+    ],
+    tech: ['Python', 'LangChain', 'RAG', 'FAISS', 'Power BI', 'Firebird DB', 'Machine Learning', 'FastAPI', 'WhatsApp API', 'Market Basket Analysis']
+  },
+  {
+    title: 'Image MobiLeads',
+    subtitle: 'OOH Vehicle Advertising · imagemobileads.com',
+    img: 'mobileleads.png',
+    url: 'https://imagemobileads.com',
+    desc: 'Three-sided marketplace connecting advertisers with drivers who wrap their vehicles for OOH advertising. Real-time GPS tracking via browser Geolocation API, Asaas payment integration (PIX/boleto/card), driver gamification with levels and medals, admin campaign management with driver assignment, contract/terms flow, and behavioral reporting with PDF export.',
+    metrics: [
+      { val: '28', lbl: 'Pages' },
+      { val: '77', lbl: 'Features' },
+      { val: '89%', lbl: 'Complete' },
+    ],
+    tech: ['Next.js 15', 'React 19', 'Supabase', 'PostGIS', 'Asaas API', 'Docker', 'GPS API', 'Tailwind CSS', 'Zustand', 'Zod']
+  },
+  {
+    title: 'Fleekers Growth Hub',
+    subtitle: 'Marketing SaaS · Co-Founded',
+    img: '',
+    url: '#',
+    desc: 'Multi-tenant marketing SaaS platform for agencies and creators. AI-powered post generation with HTML templates, growth analytics dashboard, campaign management, and automated content scheduling. Built with multi-tenant architecture supporting isolated data per organization.',
+    metrics: [
+      { val: 'SaaS', lbl: 'Model' },
+      { val: 'Multi', lbl: 'Tenant' },
+      { val: 'AI', lbl: 'Content' },
+    ],
+    tech: ['Next.js', 'Node.js', 'Redis', 'Docker', 'Multi-tenant', 'AI Generation', 'PostgreSQL', 'Tailwind CSS']
+  },
+  {
+    title: 'OtimizaRest',
+    subtitle: 'BI + AI for Restaurants · otimizarest.com',
+    img: 'otimizarest.png',
+    url: 'https://otimizarest.com',
+    desc: 'Intelligent business intelligence and AI platform for food service operations. Cost optimization dashboards, predictive analytics for inventory and demand, menu engineering analysis, and performance tracking. Helps restaurants reduce waste and increase profitability through data-driven decisions.',
+    metrics: [
+      { val: 'BI', lbl: 'Dashboards' },
+      { val: 'ML', lbl: 'Predictions' },
+      { val: 'Live', lbl: 'Production' },
+    ],
+    tech: ['React', 'Node.js', 'Power BI', 'Machine Learning', 'PostgreSQL', 'Docker', 'Nginx', 'REST API']
+  },
+  {
+    title: 'Barbearia Porto + TatamePro + GPS',
+    subtitle: '3 Full-Stack Apps in Production',
+    img: 'barbearia.png',
+    url: 'https://barbeariaporto.com.br',
+    desc: 'Three additional production applications: Barbearia Porto (barbershop booking and management), TatamePro (BJJ academy management with student tracking, belt progression, and payments), and GPS Guia para Servos (church management platform with member database and event scheduling).',
+    metrics: [
+      { val: '3', lbl: 'Live Apps' },
+      { val: 'Full', lbl: 'Stack' },
+      { val: '24/7', lbl: 'Running' },
+    ],
+    tech: ['Node.js', 'Express', 'SQLite', 'Turso DB', 'Next.js', 'Docker', 'Nginx', 'Let\'s Encrypt']
+  },
+];
+
+function openModal(idx) {
+  var p = projectData[idx];
+  if (!p) return;
+  document.getElementById('modal-title').textContent = p.title;
+  document.getElementById('modal-subtitle').textContent = p.subtitle;
+  document.getElementById('modal-desc').textContent = p.desc;
+  var img = document.getElementById('modal-img');
+  if (p.img) { img.src = p.img; img.style.display = 'block'; } else { img.style.display = 'none'; }
+  document.getElementById('modal-metrics').innerHTML = p.metrics.map(function(m) {
+    return '<div class="modal-metric"><div class="modal-metric-val">' + m.val + '</div><div class="modal-metric-lbl">' + m.lbl + '</div></div>';
+  }).join('');
+  document.getElementById('modal-tech').innerHTML = p.tech.map(function(t) {
+    return '<div class="modal-tech-item"><span>▸</span> ' + t + '</div>';
+  }).join('');
+  var cta = document.getElementById('modal-cta');
+  cta.href = p.url;
+  cta.style.display = p.url === '#' ? 'none' : 'inline-flex';
+  document.getElementById('projectModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('projectModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('projectModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+// Add click handlers to project cards
+document.querySelectorAll('.project-card').forEach(function(card, i) {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', function(e) {
+    if (e.target.closest('.project-overlay a')) return; // let direct links work
+    openModal(i);
+  });
+});
 </script>
 
 <!-- ========== LANGUAGE SWITCHER ========== -->
@@ -1144,7 +1355,7 @@ window.addEventListener('scroll', () => {
     { sel: '.nav-cta.desktop', pt: 'Fale Comigo', es: 'Hablemos' },
 
     // Hero
-    { sel: '.hero-subtitle', pt: 'AI Engineer · Cientista de Dados · Fundador — Da auditoria à IA, construindo sistemas que recuperaram US$600K, formaram 6.000+ profissionais e geraram $1M+ em receita.', es: 'AI Engineer · Científico de Datos · Fundador — De auditoría a IA, construyendo sistemas que recuperaron US$600K, formaron 6.000+ profesionales y generaron $1M+ en ingresos.' },
+    { sel: '.hero-subtitle', pt: 'AI Engineer · Cientista de Dados · Fundador — Venho de negócios, falo a linguagem da tecnologia e sei exatamente onde o dinheiro está. Por isso toda empresa que toco gera milhões.', es: 'AI Engineer · Científico de Datos · Fundador — Vengo de negocios, hablo el lenguaje de la tecnología y sé exactamente dónde está el dinero. Por eso cada empresa que toco genera millones.' },
 
     // Impact
     { sel: '#impact .section-label', pt: 'Impacto', es: 'Impacto' },
@@ -1206,7 +1417,7 @@ window.addEventListener('scroll', () => {
 
   // Impact labels
   var IMPACT_LABELS = [
-    { pt: 'Recuperados na Yara', es: 'Recuperados en Yara' },
+    { pt: 'Impacto em Negócios', es: 'Impacto en Negocios' },
     { pt: 'Profissionais Formados', es: 'Profesionales Formados' },
     { pt: 'Colocados no Mercado', es: 'Colocados en el Mercado' },
     { pt: 'Receita Gerada', es: 'Ingresos Generados' },
@@ -1242,7 +1453,7 @@ window.addEventListener('scroll', () => {
 
     // Hero subtitle
     '.hero-subtitle': {
-      en: 'AI Engineer · Data Scientist · Founder — From audit to AI, building systems that recover US$600K, train 6,000+ people, and generate $1M+ in revenue.',
+      en: 'AI Engineer · Data Scientist · Founder — I come from business, speak the language of tech, and know exactly where the money is. That's why every company I touch generates millions.',
       pt: 'AI Engineer · Cientista de Dados · Fundador — Da auditoria à IA, construindo sistemas que recuperaram US$600K, formaram 6.000+ pessoas e geraram $1M+ em receita.',
       es: 'AI Engineer · Científico de Datos · Fundador — De auditoría a IA, construyendo sistemas que recuperaron US$600K, formaron 6.000+ personas y generaron $1M+ en ingresos.'
     },
@@ -1325,7 +1536,7 @@ window.addEventListener('scroll', () => {
 
   // Impact stat labels
   var impactLabels = {
-    0: { en:'Recovered at Yara', pt:'Recuperados na Yara', es:'Recuperados en Yara' },
+    0: { en:'Business Impact', pt:'Impacto em Negócios', es:'Impacto en Negocios' },
     1: { en:'Professionals Trained', pt:'Profissionais Formados', es:'Profesionales Formados' },
     2: { en:'Placed in the Market', pt:'Colocados no Mercado', es:'Colocados en el Mercado' },
     3: { en:'Revenue Built', pt:'Receita Gerada', es:'Ingresos Generados' },
@@ -1437,9 +1648,9 @@ window.addEventListener('scroll', () => {
     // 10. Hero badges
     var badges = document.querySelectorAll('.hero-badges .badge');
     var badgeTexts = {
-      en: ['<strong>US$600K</strong> Recovered', '<strong>6,000+</strong> Trained', '<strong>900+</strong> Placed', '<strong>$1M+</strong> Revenue'],
-      pt: ['<strong>US$600K</strong> Recuperados', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Receita'],
-      es: ['<strong>US$600K</strong> Recuperados', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Ingresos'],
+      en: ['<strong>Millions</strong> in Impact', '<strong>6,000+</strong> Trained', '<strong>900+</strong> Placed', '<strong>$1M+</strong> Revenue'],
+      pt: ['<strong>Milhões</strong> em Impacto', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Receita'],
+      es: ['<strong>Millones</strong> en Impacto', '<strong>6.000+</strong> Formados', '<strong>900+</strong> Colocados', '<strong>$1M+</strong> Ingresos'],
     };
     badges.forEach(function(b, i) { if (badgeTexts[lang] && badgeTexts[lang][i]) b.innerHTML = badgeTexts[lang][i]; });
 
